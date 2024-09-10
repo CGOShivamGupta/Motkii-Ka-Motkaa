@@ -1,161 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motkii Ka Motkaa ❤️ Motkaa Ki Motkii ❤️</title>
-    <style>
-        /* Basic styling */
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motkii Ka Motkaa ❤️ Motkaa Ki Motkii ❤️</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f8ff;
+      margin: 0;
+      text-align: center;
+    }
 
-        /* Heading styling */
-        h1 {
-            font-size: 3em;
-            font-weight: bold;
-            color: #333;
-        }
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff6b6b, #ff9a9e, #ff6b6b);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: colorChange 4s infinite;
+    }
 
-        /* Heart container to position the heart and flames */
-        .heart-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 50px auto;
-        }
+    @keyframes colorChange {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        /* Red heart shape */
-        .heart {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: red;
-            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 85%, 15% 100%, 0% 35%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            color: white;
-            flex-direction: column;
-        }
+    .heart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
 
-        /* Timer display inside the heart */
-        .timer {
-            font-size: 1.5em;
-        }
+    .heart {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: flames 2s infinite ease-in-out;
+      margin-bottom: 20px;
+    }
 
-        /* Lock icon styling */
-        .lock {
-            font-size: 2em;
-            margin-top: 20px;
-        }
+    @keyframes flames {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 69, 0, 1);
+      }
+    }
 
-        /* Flames animation */
-        .flames {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            background: url('https://i.gifer.com/7Tlc.gif') no-repeat center center;
-            background-size: cover;
-            animation: wave 2s infinite;
-            transform: translate(-50%, -50%);
-        }
+    #timer {
+      font-size: 1.5em;
+      color: white;
+    }
 
-        /* Flame wave animation */
-        @keyframes wave {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.05); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
+    .lock {
+      font-size: 2em;
+      color: white;
+      margin-top: 10px;
+    }
 
-        /* Button styling */
-        .click-button {
-            background-color: white;
-            color: red;
-            font-size: 1.5em;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+    #clickBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #ff6b6b;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        /* Birthday message styling */
-        .message {
-            display: none;
-            margin-top: 30px;
-            font-size: 1.2em;
-            color: #333;
-        }
-    </style>
+    #birthdayMessage {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+      padding: 20px;
+      background-color: #fff3e6;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 <body>
-    <!-- Heading -->
-    <h1><b>Motkii Ka Motkaa ❤️ Motkaa Ki Motkii ❤️</b></h1>
 
-    <!-- Heart and flames container -->
-    <div class="heart-container">
-        <div class="heart">
-            <div class="timer" id="timer">Loading...</div>
-            <div class="lock">🔒</div>
-        </div>
-        <div class="flames"></div>
+  <h1>Motkii Ka Motkaa ❤️ Motkaa Ki Motkii ❤️</h1>
+  
+  <div class="heart-container">
+    <div class="heart">
+      <div id="timer"></div>
+      <div class="lock">🔒</div>
     </div>
+    <button id="clickBtn" onclick="showMessage()">Click! On Me</button>
+  </div>
 
-    <!-- Hidden birthday message -->
-    <div class="message" id="message">
-        Happy Birthday to my everything! 🎉 When you entered my life, you filled it with endless joy and love, and I can't imagine a world without you. You are my first and last love, the one who completes me in every way. Every day with you feels like a beautiful adventure, and I'm so grateful to have you by my side. Today, I celebrate you and the incredible love we share. I love you more than words can ever express. Happy Birthday, my love! ❤️ Once Again Happy Birthday Meri Motkii 😘, Meri Baiko ❤️, Meri Jaan 😘.
-    </div>
+  <div id="birthdayMessage">
+    Happy Birthday to my everything! 🎉 When you entered my life, you filled it with endless joy and love, and I can't imagine a world without you. You are my first and last love, the one who completes me in every way. Every day with you feels like a beautiful adventure, and I'm so grateful to have you by my side. Today, I celebrate you and the incredible love we share. I love you more than words can ever express. Happy Birthday, my love! ❤️<br><br>
+    Once Again Happy Birthday Meri Motkii 😘, Meri Baiko ❤️, Meri Jaan 😘.
+  </div>
 
-    <!-- JavaScript for timer functionality -->
-    <script>
-        // Set the target date to 11th September 2024, 12am
-        const targetDate = new Date("September 11, 2024 00:00:00").getTime();
-        const timerElement = document.getElementById('timer');
-        const messageElement = document.getElementById('message');
-        
-        function updateTimer() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+  <script>
+    function countdown() {
+      const targetDate = new Date('September 11, 2024 00:00:00').getTime();
+      const now = new Date().getTime();
+      const timeRemaining = targetDate - now;
 
-            // If countdown is finished, show button
-            if (distance <= 0) {
-                timerElement.innerHTML = "";
-                document.querySelector('.lock').style.display = 'none';
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-                const button = document.createElement('button');
-                button.innerHTML = "Click!!!!! On Me";
-                button.className = "click-button";
-                document.querySelector('.heart').appendChild(button);
+      document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-                // Button click event to display birthday message
-                button.addEventListener('click', () => {
-                    button.style.display = 'none';
-                    messageElement.style.display = 'block';
-                });
+      if (timeRemaining < 0) {
+        document.getElementById("timer").innerHTML = "";
+        document.querySelector(".lock").style.display = "none";
+        document.getElementById("clickBtn").style.display = "block";
+      }
+    }
 
-            } else {
-                // Calculate remaining days, hours, minutes, and seconds
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    function showMessage() {
+      document.getElementById("birthdayMessage").style.display = "block";
+      document.getElementById("clickBtn").style.display = "none";
+    }
 
-                // Display the countdown timer
-                timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            }
-        }
+    setInterval(countdown, 1000);
+  </script>
 
-        // Update the timer every second
-        setInterval(updateTimer, 1000);
-    </script>
 </body>
-  </html>
+</html>
